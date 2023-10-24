@@ -26,19 +26,18 @@ if [ -z "$EXIST_BLUE" ]; then
   if [ -z "$EXIST_BLUE" ]; then
     # slack으로 알람을 보낼 수 있는 스크립트를 실행한다.
     sudo ./slack_blue.sh
-
-  else
-
-    echo "green 중단 시작 : $(date '+%Y-%m-%d %H:%M:%S')" >> /home/ubuntu/deploy.log
-
-    # docker-compose.green.yml 파일을 사용하여 "green" 컨테이너 중지
-    sudo docker-compose -p ${DOCKER_APP_NAME}-green -f docker-compose.green.yml down
-
-    # 사용하지 않는 이미지 삭제
-    sudo docker image prune -af
-
-    echo "green 중단 완료 : $(date '+%Y-%m-%d %H:%M:%S')" >> /home/ubuntu/deploy.log
   fi
+
+  echo "green 중단 시작 : $(date '+%Y-%m-%d %H:%M:%S')" >> /home/ubuntu/deploy.log
+
+  # docker-compose.green.yml 파일을 사용하여 "green" 컨테이너 중지
+  sudo docker-compose -p ${DOCKER_APP_NAME}-green -f docker-compose.green.yml down
+
+  # 사용하지 않는 이미지 삭제
+  sudo docker image prune -af
+
+  echo "green 중단 완료 : $(date '+%Y-%m-%d %H:%M:%S')" >> /home/ubuntu/deploy.log
+
 
 # "blue"가 실행 중이면 "green"으로 배포 시작
 else
@@ -51,18 +50,18 @@ else
 
   if [ -z "$EXIST_GREEN" ]; then
         sudo ./slack_green.sh
-    else
-
-      echo "blue 중단 시작 : $(date '+%Y-%m-%d %H:%M:%S')" >> /home/ubuntu/deploy.log
-
-      # docker-compose.blue.yml 파일을 사용하여 "blue" 컨테이너 중지
-      sudo docker-compose -p ${DOCKER_APP_NAME}-blue -f docker-compose.blue.yml down
-
-      # 사용하지 않는 이미지 삭제
-      sudo docker image prune -af
-
-      echo "blue 중단 완료 : $(date '+%Y-%m-%d %H:%M:%S')" >> /home/ubuntu/deploy.log
   fi
+
+echo "blue 중단 시작 : $(date '+%Y-%m-%d %H:%M:%S')" >> /home/ubuntu/deploy.log
+
+# docker-compose.blue.yml 파일을 사용하여 "blue" 컨테이너 중지
+sudo docker-compose -p ${DOCKER_APP_NAME}-blue -f docker-compose.blue.yml down
+
+# 사용하지 않는 이미지 삭제
+sudo docker image prune -af
+
+echo "blue 중단 완료 : $(date '+%Y-%m-%d %H:%M:%S')" >> /home/ubuntu/deploy.log
+
 fi
 
 echo "배포 종료 : $(date '+%Y-%m-%d %H:%M:%S')" >> /home/ubuntu/deploy.log
