@@ -6,8 +6,8 @@ on:
 
 env:
   BUCKET_NAME: bidpanda-app-bucket
-  CODE_DEPLOY_APP_NAME: Nginx-deploy
-  DEPLOYMENT_GROUP_NAME: Nginx-deploy
+  CODE_DEPLOY_APP_NAME: bidpanda-app-deploy
+  DEPLOYMENT_GROUP_NAME: bidpanda-app-deploy
   RESOURCE_PATH: ./src/main/resources/application.yaml
 
 permissions:
