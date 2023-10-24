@@ -7,7 +7,7 @@ cd /home/ubuntu/app
 DOCKER_APP_NAME="spring"
 
 # 현재 실행 중인 "blue" 컨테이너 확인
-EXIST_BLUE=$(sudo docker-compose -p ${DOCKER_APP_NAME}-blue -f docker-compose.blue.yml ps | grep Up)
+EXIST_BLUE=$(sudo docker-compose -p ${DOCKER_APP_NAME}-blue -f docker-compose.blue.yml ps | grep "spring-blue" | grep Up)
 
 # 배포 시작일자 기록
 echo "배포 시작일자 : $(date '+%Y-%m-%d %H:%M:%S')" >> /home/ubuntu/deploy.log
