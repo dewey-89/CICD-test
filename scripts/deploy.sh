@@ -5,7 +5,7 @@ cd /home/ubuntu/app
 DOCKER_APP_NAME=spring
 
 # 실행중인 blue가 있는지
-EXIST_BLUE=$(docker-compose -p ${DOCKER_APP_NAME}-blue -f docker-compose.blue.yml ps | grep Up)
+EXIST_BLUE=$(docker-compose -p ${DOCKER_APP_NAME}-blue -f docker-compose.blue.yml ps | grep running)
 #
 # green이 실행중이면 blue up
 if [ -z "$EXIST_BLUE" ]; then
